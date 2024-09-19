@@ -1,0 +1,120 @@
+
+.order__history__container {
+     
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: flex-start;
+}
+
+
+.order__history {
+    
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-orders{
+    padding-left: 5%;
+    padding-top: 1%;
+}
+
+.bgcolor{
+   
+    border-radius: 5px;
+    position: relative;
+}
+
+.order__history__header {
+    width: 100%;
+    height: 50px;
+    font-size: 1.7rem;
+    font-weight: bolder;
+}
+
+.order__history__detail {
+    width: 100%;
+    height: 50px;
+}
+
+.account__details__container {
+    height: 200px;
+    border-bottom: 1px solid gray;
+}
+
+.account__details__header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 780px) {
+    .account__details__header {
+        flex-direction: column;
+        height: auto;
+        align-items: flex-start;
+    }
+}
+
+.details__header {
+    
+    height: auto;
+    font-size: 1.7rem;
+    font-weight: bolder;
+}
+
+.logout__action {
+    width: 20%;
+    height: auto;
+}
+.plusminus{
+    position: absolute;
+    font-size: 1rem;
+    font-weight: bolder;
+    right: 4%;
+    top: 0;
+}
+.container1{
+    margin: 20px 0;
+    height: 100vh;
+    width: 100%;
+    overflow: scroll;
+}
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    cursor: pointer;
+    
+}
+
+
+.table th, .table td{
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+.table th{
+    background-color: #e85b5b;
+    text-align: center;
+    
+}
+
+
+.table tr th tr:nth-child(odd){
+    background-color: transparent;
+}
+.table tr td tr:nth-child(odd){
+    background-color: transparent;
+}
+
+.table tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+
+.table tr:not(:first-child):hover{
+    background-color: #726767;
+    color: white;
+}
