@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import './booking.css'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -17,6 +18,7 @@ import { getUserData } from '../services/Storage';
 import Nav from '../Nav';
 import { useNavigate } from 'react-router-dom';
 import cpntusjpg from '../images/homepage/recep.webp'
+import Getroomdata from './getroomdata';
 
 const style = {
   position: 'absolute',
@@ -72,6 +74,7 @@ const Booking = () => {
   const [cost, setcost]=useState(0)
   const [gtot,setgtot]=useState(0)
   const [region, setRegion] = useState('');
+  const [cstatus,setcstatus]=useState('pending')
   
   var amount=0;
   
@@ -97,7 +100,32 @@ const Booking = () => {
   var gst=((cost)*(totroom)*(no_night))*12/100
    amount=cacl;
 
+   const [sroom,setsroom]=useState(10)
+   const [droom,setdroom]=useState(10)
+   const [jroom,setjroom]=useState(10)
+   const datacolloction=Getroomdata()
+   useEffect(()=>{
+    datacolloction.roomavailablity.map((m)=>{
+      console.log(m.broomtype)
+       if(m.broomtype === 'Superior Double'){
+         setsroom(sroom-1)
+       }
+       if(m.broomtype === 'Delux Room'){
+         setdroom(droom-1)
+       }
+       if(m.broomtype === 'Junior Room'){
+         setjroom(jroom-1)
+       }
+      
+     
+     })
   
+   },[])
+
+  
+    
+
+
    
 const clearall=()=>{
   setsearch(true);
@@ -224,9 +252,7 @@ const openbar3=()=>{
    const bookingsuccessopen=()=>setbookingsuccess(true)
    const bookingsuccessclose=()=>{setbookingsuccess(false);clearall(); navigate('/profile')}
 
-   const [sroom,setsroom]=useState(5)
-   const [droom,setdroom]=useState(3)
-   const [jroom,setjroom]=useState(2)
+  
 
    const superiorroom=()=>{
     setroomtype('Superior Double');
@@ -265,13 +291,13 @@ const openbar3=()=>{
         currency:"INR",
         name:"STARTUP_PROJECTS",
         description:"for testing purpose",
-        handler: function(response){
+        handler:async function(response){
           var pay_id=response.razorpay_payment_id;
           var b_id="kiscol" + Math.floor(1000+Math.random()*9000)
           setpayment_id(pay_id);
           setbook_id(b_id);
-           var data={userid,guestname,guestemail,phonenumbet,address,adult,Child,totroom,roomtype,date,todate,cost,amount,payment_id:pay_id,aadhar_no,book_id:b_id,no_night,gtot}
-           axios.post('https://hotel-management-system-backend-audc.onrender.com/booking',data)
+           var data={userid,guestname,guestemail,phonenumbet,address,adult,Child,totroom,roomtype,date,todate,cost,amount,payment_id:pay_id,aadhar_no,book_id:b_id,no_night,gtot,cstatus}
+          await axios.post('https://hotel-management-system-backend-audc.onrender.com/booking',data)
            .then(res=>{console.log(res);
             bookingsuccessopen();
            })

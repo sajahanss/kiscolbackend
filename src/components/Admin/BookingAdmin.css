@@ -1,0 +1,148 @@
+
+.order__history__container2 {
+     
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: flex-start;
+    
+}
+
+
+.order__history2 {
+    
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-orders2{
+    padding-left: 5%;
+    padding-top: 1%;
+}
+
+.bgcolor{
+   
+    border-radius: 5px;
+    position: relative;
+}
+
+.order__history__header2{
+    width: 100%;
+    height: 50px;
+    font-size: 1.7rem;
+    font-weight: bolder;
+}
+
+.order__history__detail2 {
+    width: 100%;
+    height: 50px;
+}
+
+.account__details__container2{
+    height: 200px;
+    border-bottom: 1px solid gray;
+}
+
+.account__details__header2 {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 780px) {
+    .account__details__header2 {
+        flex-direction: column;
+        height: auto;
+        align-items: flex-start;
+    }
+}
+
+.details__header2 {
+    
+    height: auto;
+    font-size: 1.7rem;
+    font-weight: bolder;
+}
+
+.logout__action {
+    width: 20%;
+    height: auto;
+}
+
+.container2{
+    margin: 20px 0;
+    height: 100vh;
+    width: 100%;
+    overflow: scroll;
+}
+.table2{
+    width: 100%;
+    border-collapse: collapse;
+    cursor: pointer;
+    
+}
+
+
+.table2 th, .table2 td{
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+.table2 th{
+    background-color: #e85b5b;
+    text-align: center;
+    
+}
+
+
+
+
+.table2 tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+
+.table2 tr:not(:first-child):hover{
+    background-color: #726767;
+    color: white;
+}
+
+.check-in{
+    position: absolute;
+    width: 70vw;
+    height: 70vh;
+    z-index: 99999;
+    background-color: rgb(240, 155, 155);
+    border: 2px solid gray;
+    
+}
+
+.admincontainer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.cin-header{
+    border-bottom: 2px solid black;
+    padding-bottom: 12px;
+}
+
+
+.rooms1{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.room1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

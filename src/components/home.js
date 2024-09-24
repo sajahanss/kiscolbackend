@@ -20,6 +20,7 @@ import Nav from './Nav';
 import Footer from './footer';
 import Accordions from './Accordion';
 
+
  
 
 function NextArrow(props) {
@@ -52,7 +53,7 @@ const srcloc="https://poetic-douhua-022f4b.netlify.app/"
 export default function Home() {
 
 
- 
+
 
   var settings = {
     dots: false,

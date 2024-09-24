@@ -1,0 +1,34 @@
+.adminpage{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    background-image: url('bgimgmain.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+}
+
+.btnadmin{
+    width: 400px;
+    background-color: darkgreen;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.btnadmin:hover{
+    background-color: lightgreen;
+    color: black;
+}
+.myh1{
+    position: absolute;
+    top: 20vh;
+    color: #3e3403;
+}
