@@ -56,9 +56,11 @@ export default function LoginPage (){
                     setErrors({...errors,custom_error:"E-mail not registered."})
                 }else{
                     
-                    axios.post("https://hotel-management-system-backend-audc.onrender.com/uploads/profile",{userprofileid:response.data._id})
+                    axios.post("https://kiscol-backend.onrender.com/uploads/profile",{userprofileid:response.data._id})
                     .then((resultdata)=>{
+                        if(resultdata.data.length!==0){
                         storeprofileData(resultdata.data[0].myFile)
+                       }
                     })
                     storeUserData(response.data);
                    
@@ -128,7 +130,7 @@ export default function LoginPage (){
                             </div>
                             <div className="clearfix"></div>
                             <div className="form-group">
-                            Create new account ? Please <Link  to="/register">Register</Link>
+                            Create new account ? Please <Link  to="/register" style={{color:'blue',textDecoration:'underline'}}>Register</Link>
                             </div>
                             </form>
                         </div>

@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.29ace02d.css",
-    "main.js": "/static/js/main.7efba837.js",
+    "main.css": "/static/css/main.0d854b12.css",
+    "main.js": "/static/js/main.78292d3c.js",
+    "static/js/213.2cfafdd9.chunk.js": "/static/js/213.2cfafdd9.chunk.js",
+    "static/js/732.1152cb59.chunk.js": "/static/js/732.1152cb59.chunk.js",
     "static/js/453.711742d0.chunk.js": "/static/js/453.711742d0.chunk.js",
     "static/media/new9.jpg": "/static/media/new9.340f8313834e3b620e0b.jpg",
     "static/media/new1.jpg": "/static/media/new1.bf4e197cbe1e2a42a5b8.jpg",
@@ -17,6 +19,7 @@
     "static/media/new4.jpg": "/static/media/new4.fdc132663dff44556a4b.jpg",
     "static/media/new16.jpg": "/static/media/new16.fd56542b3bba5e0856e8.jpg",
     "static/media/new24.jpg": "/static/media/new24.187f78154d7f51f62ad0.jpg",
+    "static/media/bgimgmain.png": "/static/media/bgimgmain.f67e10ff1a6a8d8a50f2.png",
     "static/media/new11.jpg": "/static/media/new11.cc4b65a4fa7f138d40f3.jpg",
     "static/media/new12.jpg": "/static/media/new12.1c2f2cd1313449f6919d.jpg",
     "static/media/deluxroom.jpg": "/static/media/deluxroom.5e7e1e90a551d50fc6c5.jpg",
@@ -100,12 +103,14 @@
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/index.html",
     "static/media/email.svg": "/static/media/email.51013344a07c496679158e9a7cf9940d.svg",
-    "main.29ace02d.css.map": "/static/css/main.29ace02d.css.map",
-    "main.7efba837.js.map": "/static/js/main.7efba837.js.map",
+    "main.0d854b12.css.map": "/static/css/main.0d854b12.css.map",
+    "main.78292d3c.js.map": "/static/js/main.78292d3c.js.map",
+    "213.2cfafdd9.chunk.js.map": "/static/js/213.2cfafdd9.chunk.js.map",
+    "732.1152cb59.chunk.js.map": "/static/js/732.1152cb59.chunk.js.map",
     "453.711742d0.chunk.js.map": "/static/js/453.711742d0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.29ace02d.css",
-    "static/js/main.7efba837.js"
+    "static/css/main.0d854b12.css",
+    "static/js/main.78292d3c.js"
   ]
 }

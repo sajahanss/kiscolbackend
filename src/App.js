@@ -21,6 +21,7 @@ import MyAccount from "./components/nav pages/MyAccount";
 import Roomadmin from "./components/Admin/Roomadmin";
 import BookingAdmin from "./components/Admin/BookingAdmin";
 import Admin from "./components/Admin/Admin";
+import { getUseremail } from "./components/services/Storage";
 
 function App() {
   return (
@@ -44,8 +45,8 @@ function App() {
                 <Route path="/about" element={<Aboutus />} />
                 <Route path="/enquiry" element={<Enquiry />} />
                 <Route path="/bookingAdmin" element={<BookingAdmin />} />
-                <Route path="/Admin" element={<Admin />} />
-                <Route path="/roomAdmin" element={<Roomadmin />} />
+               {getUseremail()==='admin@admin.in' && <Route path="/Adminkiscol" element={<Admin />} />}
+               {getUseremail()==='admin@admin.in' &&  <Route path="/roomAdmin" element={<Roomadmin />} />}
                 
           </Routes>
       

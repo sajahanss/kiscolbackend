@@ -11,21 +11,29 @@ const BookingAdmin = () => {
     const [selected,setselected]=useState(null)
     const bookedroomtype=Roomsdetail()
     const [roomno,setroomno]=useState(null)
-    
+    const [status,setstatus]=useState([])
     
     
     useEffect(()=>{
         
-        axios.get("http://localhost:5000/admin/bookingdetails")
+        axios.get("https://kiscol-backend.onrender.com/admin/bookingdetails")
         .then((res)=>{
         
            setinvoicedatas((res.data).reverse())
            
         })
         .catch(err=>console.log(err))
+
     },[])
 
-    const handlebooking=async(data)=>{
+ 
+    if(invoicedatas.length!=0){
+        invoicedatas.map((st)=>{
+            status.push(false);
+        })
+    }
+
+    const handlebooking=async(data,index)=>{
         if(roomtype.length!==0){
            while(roomtype.length){
             roomtype.pop();
@@ -53,7 +61,8 @@ const BookingAdmin = () => {
              })
              
         }
-   
+        
+       
          setbookingbar(true);
          setbookeddata(data);
          console.log(data.cstatus)
@@ -71,25 +80,42 @@ const BookingAdmin = () => {
        
          const bkid=bookeddata.book_id
          const broomtype=bookeddata.roomtype
-         const cstatus='Checked-in'
-         const formdata={bkid,broomtype,roomno,cstatus}
+         const guestname=bookeddata.guestname
+         const checkintime=new Date().toString()
+         const book_id=bookeddata._id;
+         const formdata={bkid,broomtype,roomno,guestname,checkintime,book_id}
          
-         await axios.post("http://localhost:5000/checkin",formdata)
+         await axios.post("https://kiscol-backend.onrender.com/checkin",formdata)
          .then((output)=>{
             alert('checked In')
             setbookingbar(false);
-
+             window.location.reload(false)
          })
          .catch((err)=>{console.log(err)})
          
          
+
     }
 
+    const handlebookingchckout=async(data,index)=>{
+        const coutid=data.book_id;
+       await axios.post('https://kiscol-backend.onrender.com/checkout',{coutid})
+       .then((output)=>{
+        alert('checked out')
+        setbookingbar(false);
+         window.location.reload(false)
+     })
+     .catch((err)=>{console.log(err)})
+
+    }
 
   return (
     <div className='admincontainer'>
         
         <div className="order__history__container2">
+        <div className='Header-bar-button'>
+            <a className='btn btn-dark w-75' href='/Adminkiscol'>Back To Admin Page</a>
+         </div>
                 <div className="order__history2">
                     <div className="order__history__header2 fs-1 text-center m-3">Booking Information </div>
                     {/* <button onClick={handleinvoice}>view orders</button> */}
@@ -124,8 +150,8 @@ const BookingAdmin = () => {
                             <td>{d.no_night} Nights(s)</td>
                             <td>{d.gtot}</td>
                             <td>{d.payment_id}</td>
-                            <td>{d.cstatus}</td>
-                            <td><button className='btn bg-success' onClick={(e)=>{handlebooking(d)}}>Check In</button></td>
+                            <td>{d.cstatus !== 'pending' && d.cstatus !== 'Checkout' ? <button className='btn bg-danger' onClick={(e)=>{handlebookingchckout(d,index)}}>CheckOut</button> :<span><b style={{color:'blue'}}>Check-In</b> -- {d.cindat}</span> }</td>
+                            <td>{d.cstatus !== 'Checkin' && d.cstatus !== 'Checkout' ? <button className='btn bg-success' onClick={(e)=>{handlebooking(d,index)}}>Check In</button> :<span><b style={{color:'blue'}}>Check-Out </b> -- {d.coutdate}</span>}</td>
                             
                         </tr>
                     ))

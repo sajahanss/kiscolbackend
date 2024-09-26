@@ -73,7 +73,7 @@ export default function RegisterPage(){
         <div>
           
             <section className="register-block">
-                <div className="container1">
+                <div className="container4">
                 <div className="row ">
                     <div className="col register-sec">
                         <h2 className="text-center">Register Now</h2>
@@ -123,11 +123,11 @@ export default function RegisterPage(){
                             </div>):null
                             }
             
-                            <input type="submit" className="btn btn-login float-right" disabled={loading}  value="Register" />
+                            <input type="submit" className="btn btn-login mt-3" disabled={loading}  value="Register" />
                         </div>
                         <div className="clearfix"></div>
                         <div className="form-group">
-                        Already have account ? Please <Link to="/login">Login</Link>
+                        Already have account ? Please <Link to="/login" style={{color:'blue',textDecoration:'underline'}}>Login</Link>
                         </div>
             
             

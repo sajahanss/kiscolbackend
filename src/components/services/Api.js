@@ -1,7 +1,7 @@
 import axios from "axios"
 import { getUserData} from './Storage'
 
-axios.defaults.baseURL = "https://hotel-management-system-backend-audc.onrender.com";
+axios.defaults.baseURL = "https://kiscol-backend.onrender.com";
 
 
 export const RegisterApi = (inputs)=>{

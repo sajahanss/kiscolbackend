@@ -19,6 +19,7 @@ import Nav from '../Nav';
 import { useNavigate } from 'react-router-dom';
 import cpntusjpg from '../images/homepage/recep.webp'
 import Getroomdata from './getroomdata';
+import { usePDF } from 'react-to-pdf';
 
 const style = {
   position: 'absolute',
@@ -49,6 +50,7 @@ const stylesuccess = {
 
 
 const Booking = () => {
+  const { toPDF, targetRef } = usePDF({filename: 'Kiscol_Invoice.pdf'});
   const [userid,setuserid]=useState(getUserData())
   const [search,setsearch]=useState(true);
   const [avalablebar,setavailablebar]=useState(false);
@@ -75,6 +77,7 @@ const Booking = () => {
   const [gtot,setgtot]=useState(0)
   const [region, setRegion] = useState('');
   const [cstatus,setcstatus]=useState('pending')
+  const [loading,setloading]=useState(false)
   
   var amount=0;
   
@@ -103,27 +106,66 @@ const Booking = () => {
    const [sroom,setsroom]=useState(10)
    const [droom,setdroom]=useState(10)
    const [jroom,setjroom]=useState(10)
-   const datacolloction=Getroomdata()
-   useEffect(()=>{
-    datacolloction.roomavailablity.map((m)=>{
-      console.log(m.broomtype)
-       if(m.broomtype === 'Superior Double'){
-         setsroom(sroom-1)
-       }
-       if(m.broomtype === 'Delux Room'){
-         setdroom(droom-1)
-       }
-       if(m.broomtype === 'Junior Room'){
-         setjroom(jroom-1)
-       }
-      
-     
-     })
-  
-   },[])
+
 
   
+
+   const datacolloction=Getroomdata()
+
+  
+   
+   useEffect(()=>{
     
+    function delroomc(count){
+      return count.broomtype === 'Delux Room'
+     }
+     function suproomc(count){
+      return count.broomtype === 'Superior Double'
+     }
+     function junroomc(count){
+      return count.broomtype === 'Junior Room'
+     }
+     setsroom(datacolloction.roomavailablity.filter(suproomc).length)
+     setdroom(datacolloction.roomavailablity.filter(delroomc).length)
+     setjroom(datacolloction.roomavailablity.filter(junroomc).length)
+
+   },[sroom,droom,jroom,datacolloction])
+
+
+   const [sroomcost,setsroomcost]=useState(0)
+   const [droomcost,setdroomcost]=useState(0)
+   const [jroomcost,setjroomcost]=useState(0)
+
+   useEffect(()=>{
+  
+    function supcost(datascost){
+      return datascost.roomtype === 'Superior Double'
+     }  
+
+    function delcost(datascost){
+      return datascost.roomtype === 'Delux Room'
+     }  
+
+   function juncost(datascost){
+    return datascost.roomtype === 'Junior Room'
+   }  
+
+    const costvalue=datacolloction.roomsupdation.filter(supcost)
+    if(costvalue.length!==0){
+      setsroomcost(datacolloction.roomsupdation.filter(supcost)[0].cost)
+    }
+
+    if(datacolloction.roomsupdation.filter(delcost).length!==0){
+      setdroomcost(datacolloction.roomsupdation.filter(delcost)[0].cost)
+    }
+
+    if(datacolloction.roomsupdation.filter(juncost).length!==0){
+      setjroomcost(datacolloction.roomsupdation.filter(juncost)[0].cost)
+    }
+     
+     
+
+  },[sroomcost,droomcost,jroomcost,datacolloction])
 
 
    
@@ -149,7 +191,7 @@ const clearall=()=>{
   setchild(1)
   settotroom(1)
   setroomtype('')
-   setcost(0)
+  setcost(0)
   setgtot(0)
   setRegion('');
   setbook_id('');
@@ -256,19 +298,19 @@ const openbar3=()=>{
 
    const superiorroom=()=>{
     setroomtype('Superior Double');
-    setcost(3300)
+    setcost(parseInt(sroomcost))
     handleopenbar()
    }
    
    const deluxroom=()=>{
     setroomtype('Delux Room');
-    setcost(3500)
+    setcost(parseInt(droomcost))
     handleopenbar();
    }
 
    const juniorroom=()=>{
     setroomtype('Junior Room');
-    setcost(5500)
+    setcost(parseInt(jroomcost))
     handleopenbar()
    }
 
@@ -296,12 +338,14 @@ const openbar3=()=>{
           var b_id="kiscol" + Math.floor(1000+Math.random()*9000)
           setpayment_id(pay_id);
           setbook_id(b_id);
-           var data={userid,guestname,guestemail,phonenumbet,address,adult,Child,totroom,roomtype,date,todate,cost,amount,payment_id:pay_id,aadhar_no,book_id:b_id,no_night,gtot,cstatus}
-          await axios.post('https://hotel-management-system-backend-audc.onrender.com/booking',data)
+          bookingsuccessopen();
+          setloading(true)
+           var data={userid,guestname,guestemail,phonenumbet,address,adult,Child,totroom,roomtype,date,todate,cost,amount,payment_id:pay_id,aadhar_no,book_id:b_id,no_night,gtot,cstatus:cstatus}
+          await axios.post('https://kiscol-backend.onrender.com/booking',data)
            .then(res=>{console.log(res);
-            bookingsuccessopen();
-           })
+            })
            .catch(err=>console.log(err))
+          .finally(setloading(false))
         },
         prefill: {
           name:{guestname},
@@ -404,7 +448,7 @@ for(var i=1;i<11;i++){
                   <img src={suproom} className='imgsize' alt='superiorroom'/>
               </div>
               <div className='col-6'>
-                  <h1>Superior Double <sup className='text-danger'>(only {sroom} room(s) available)</sup></h1>
+                  <h1>Superior Double <sup className='text-danger'>(only {10-sroom} room(s) available)</sup></h1>
                  <div className='d-flex mt-2'>
                   <FaUsers /> Maxmum Adults-3 | <FaChild /> Maxmum Child-1</div>
                   <p className='w-75 mt-2 ms-2'>INCLUSIONS: Breakfast, 24 hrs wifi Facilities Complimentary 
@@ -432,12 +476,12 @@ for(var i=1;i<11;i++){
                    </Modal>
               </div>
               <div className='col-2'>
-             <div className='d-flex'> <FaRupeeSign /> <h1>3300/-</h1></div>
+             <div className='d-flex'> <FaRupeeSign /> <h1>{sroomcost}/-</h1></div>
              <p>Avg. Per Room/Night</p>
               </div>
               <div className='acordionfooter'>
               <h1>Rooms with Breakfast</h1>
-              <div className='d-flex ali'> <FaRupeeSign /> <h1>3300/-<span style={{color:'yellow'}}>Price</span></h1></div>
+              <div className='d-flex ali'> <FaRupeeSign /> <h1>{sroomcost}/-<span style={{color:'yellow'}}>Price</span></h1></div>
               <button className='btn btn-success p-1 ps-3 pe-3 text-white mb-3' onClick={superiorroom} >Select</button>
              </div>
 
@@ -449,7 +493,7 @@ for(var i=1;i<11;i++){
                   <img src={delux} className='imgsize' alt='superiorroom'/>
               </div>
               <div className='col-6'>
-                  <h1>Deluxe Double Room <sup className='text-danger'>(only {droom} room(s) available)</sup></h1>
+                  <h1>Deluxe Double Room <sup className='text-danger'>(only {10-droom} room(s) available)</sup></h1>
                  <div className='d-flex mt-2'>
                   <FaUsers /> Maxmum Adults-3 | <FaChild /> Maxmum Child-1</div>
                   <p className='w-75 mt-2 ms-2'>Facilities Complimentary newspaper Air conditioning Blackout drapes/ curtains Climate control Direct-dial phone Coffee/ tea maker Wake-up calls Daily... 
@@ -476,12 +520,12 @@ for(var i=1;i<11;i++){
                    </Modal>
               </div>
               <div className='col-2'>
-             <div className='d-flex'> <FaRupeeSign /> <h1>3500/-</h1></div>
+             <div className='d-flex'> <FaRupeeSign /> <h1>{droomcost}/-</h1></div>
              <p>Avg. Per Room/Night</p>
               </div>
               <div className='acordionfooter'>
               <h1>Rooms with Breakfast</h1>
-              <div className='d-flex'> <FaRupeeSign /> <h1>3500/-<span style={{color:'yellow'}}>Price</span></h1></div>
+              <div className='d-flex'> <FaRupeeSign /> <h1>{droomcost}/-<span style={{color:'yellow'}}>Price</span></h1></div>
               <button className='btn btn-success p-1 ps-3 pe-3 mb-3 text-white' onClick={deluxroom}>Select</button>
              </div>
 
@@ -493,7 +537,7 @@ for(var i=1;i<11;i++){
                   <img src={junior} className='imgsize' alt='superiorroom'/>
               </div>
               <div className='col-6'>
-                  <h1>Junior Suite Room <sup className='text-danger'>(only {jroom} room(s) available)</sup></h1>
+                  <h1>Junior Suite Room <sup className='text-danger'>(only {10-jroom} room(s) available)</sup></h1>
                  <div className='d-flex mt-2'>
                   <FaUsers /> Maxmum Adults-3 | <FaChild /> Maxmum Child-1</div>
                   <p className='w-75 mt-2 ms-2'>24 hrs wifi, Fruit Basket on Arrival Facilities Complimentary newspaper Air conditioning Blackout drapes/ curtains Climate control Direct-dial...
@@ -519,12 +563,12 @@ for(var i=1;i<11;i++){
                    </Modal>
               </div>
               <div className='col-2'>
-             <div className='d-flex'> <FaRupeeSign /> <h1>5500/-</h1></div>
+             <div className='d-flex'> <FaRupeeSign /> <h1>{jroomcost}/-</h1></div>
              <p>Avg. Per Room/Night</p>
               </div>
               <div className='acordionfooter'>
               <h1>Rooms with Breakfast</h1>
-              <div className='d-flex'> <FaRupeeSign /> <h1>5500/-<span style={{color:'yellow'}}>Price</span></h1></div>
+              <div className='d-flex'> <FaRupeeSign /> <h1>{jroomcost}/-<span style={{color:'yellow'}}>Price</span></h1></div>
               <button className='btn btn-success p-1 ps-3 pe-3 mb-3 text-white' onClick={juniorroom}>Select</button>
              </div>
 
@@ -608,8 +652,9 @@ for(var i=1;i<11;i++){
         <h1 className='ms-3'>Review Your Booking</h1>  
         </div>
         { booking && 
-      <div className='acordionbody'>
-        <h1 className='text-center m-1 mt-3'>Customer Details</h1>
+      <div className='acordionbody' >
+        <div ref={targetRef} className='ps-3 pe-3'>
+        <h1 className='text-center m-1 mt-3 mb-2'>Customer Details</h1>
         <div>
          
             <table className='t1'>
@@ -625,7 +670,7 @@ for(var i=1;i<11;i++){
            </table>
         </div>
         <div>
-        <h1 className='text-center m-1 mt-3'>Booking details</h1>
+        <h1 className='text-center m-1 mt-3 mb-3'>Booking details</h1>
             <table className='t1'>
               <tr>
                 <td>Checkin Date </td> <td> {date1.toISOString().split('T')[0]}</td>
@@ -662,7 +707,7 @@ for(var i=1;i<11;i++){
             </tr>
 
           </table>
-           <h1 className='text-center m-1 mt-3'>Summary</h1>
+           <h1 className='text-center m-1 mt-3 mb-3'>Summary</h1>
           <table className='t3'>
             
             <tr><td></td><td className='text-right pe-5'>Sub Total	</td> <td className='text-right'>{(cost * totroom * no_night)}.00	</td></tr>
@@ -670,7 +715,9 @@ for(var i=1;i<11;i++){
             <tr><th></th><th className='text-right pe-5'>Grand Total	</th> <th className='text-right'>{gtot}.00	</th></tr>
           </table>
         </div>
+        </div>
          <p className='text-right pe-2'><button type='button' onClick={handleCheckout} className='bgcolor p-1 ps-2 pe-2 rounded mt-3'> Payment</button></p>
+       
       </div>
 }
 </div>
@@ -739,12 +786,19 @@ for(var i=1;i<11;i++){
         onClose={bookingsuccessclose}>
 <Box sx={stylesuccess}>
 <div style={{float:'right',fontSize:'1rem'}} onClick={bookingsuccessclose}><IoMdCloseCircleOutline style={{fontSize:'2rem',width:'25px',height:'25px'}} /></div>
+{loading ? <div class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>:
 <div>
  <p className='h2'> Hi! {guestname}, Your Booking Confirmed </p>
- <p> Your Booking Id:  <span style={{color:'blue'}}> {book_id}</span></p>
- <p> Your Payment Id:<span style={{color:'blue'}}> {payment_id} </span> </p>
+ <p> Your Booking Id:<b>  <span style={{color:'white'}}> {book_id}</span></b></p>
+ <p> Your Payment Id:<b><span style={{color:'white'}}> {payment_id} </span></b> </p>
  <p>Confirmation Details Will send to your Email and Mobile No</p>
+ <button className='btn btn-dark' onClick={() => toPDF()}>Download Invoice</button>
 </div>
+}
 </Box>
 </Modal>
 

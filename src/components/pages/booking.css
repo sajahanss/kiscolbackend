@@ -101,6 +101,23 @@ table{
     width: 30%;
 }
 
+.t1>tr>td , th{
+    height: 30px;
+    padding: 10px;
+}
+
+.t2>tr>td , th{
+    height: 30px;
+    padding: 10px;
+}
+
+.t3>tr>td , th{
+    height: 30px;
+    padding: 10px;
+}
+
+
+
 .ht20{
     height: 20vh;
 }

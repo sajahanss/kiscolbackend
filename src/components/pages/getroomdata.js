@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 
@@ -8,17 +8,17 @@ const Getroomdata = () => {
     
     useEffect(()=>{
          async function roomget(){
-            await axios.get('http://localhost:5000/roomavailable')
+            await axios.get('https://kiscol-backend.onrender.com/roomavailable')
             .then((res)=>{
-                console.log(res)
+                
                 setroomavailability(res.data)
               })
             .catch((err)=>console.log(err))
          }
            
          async function roomupdation(){
-            await axios.get('http://localhost:5000/roomdatas')
-            .then((res)=>{console.log(res)
+            await axios.get('https://kiscol-backend.onrender.com/roomdatas')
+            .then((res)=>{
                 setroomsupdation(res.data)
             })
             .catch((err)=>console.log(err))
@@ -26,9 +26,11 @@ const Getroomdata = () => {
          roomget()
          roomupdation()
 
+
+
     },[])
 
-    
+  
        
   return {roomsupdation,roomavailablity}
 

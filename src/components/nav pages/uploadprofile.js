@@ -4,7 +4,7 @@ import axios from 'axios';
 import './upload.css';
 import { getUserData,storeprofileData,getprofilepic} from '../services/Storage';
 
-const url = "https://hotel-management-system-backend-audc.onrender.com/uploads"
+const url = "https://kiscol-backend.onrender.com/uploads"
 
 function UploadedDP() {
   

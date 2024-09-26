@@ -29,7 +29,7 @@ const MyAccount = () => {
 
    
     useEffect(()=>{
-        axios.post("https://hotel-management-system-backend-audc.onrender.com/bookingdetails",{user_id})
+        axios.post("https://kiscol-backend.onrender.com/bookingdetails",{user_id})
         .then((res)=>{
             
            setinvoicedatas((res.data).reverse())
@@ -59,14 +59,14 @@ const MyAccount = () => {
                     <div className="account__holder__name">Account holder name : {getUserName()}</div>
                     <div className="account__holder__email">Account holder email : {getUseremail()}</div>
                     <div className="manage__account__action mt-2">
-                        <a href="/account/manage" className='btn btn-dark'>Manage account</a> 
+                       {getUseremail()==='admin@admin.in' ? <a href="/Adminkiscol" className='btn btn-dark'>Admin</a> : null }
                         <a href="/" className="btn btn-dark ms-5" onClick={logoutUser} style={{cursor:"pointer"}}>
                     Sign out
                   </a>  
                     </div>
                 </div>
             </div>
-
+            
             <div className="order__history__container">
                 <div className="order__history">
                     <div className="order__history__header">Your Bookings </div>

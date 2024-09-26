@@ -15,10 +15,10 @@ export function Roomsdetail(){
   
    useEffect(()=>{
    async function dataretreive(){
-    await axios.get("http://localhost:5000/checkindata")
+    await axios.get("https://kiscol-backend.onrender.com/checkindata")
     .then((res)=>{
       setbookedroomdata(res.data)
-      
+            
     })
     .catch(err=>console.log(err))
   }
@@ -74,20 +74,20 @@ if(roomclr.length!==0){
         if(i<=10){
 
           if(parseInt(dd.roomno)===(1000+i)){
-            suproom.push(dd.bkid)
+            suproom.push(dd.guestname)
             roomclr.push(true)
             iterstop=true
           }
         }else if(i<=20){
           if(parseInt(dd.roomno)===(2000+(i-10))){
-            delroom.push(dd.bkid)
+            delroom.push(dd.guestname)
             roomclr.push(true)
             iterstop=true
           }
 
         }else{
           if(parseInt(dd.roomno)===(3000+(i-20))){
-            junroom.push(dd.bkid)
+            junroom.push(dd.guestname)
             roomclr.push(true)
             iterstop=true
           }
@@ -133,7 +133,7 @@ const Roomadmin = () => {
     const createPost = async (newImage) => {
       try{
           
-        await axios.post('http://localhost:5000/roomdatas',newImage)
+        await axios.post('https://kiscol-backend.onrender.com/roomdatas',newImage)
         .then((data)=>{
           alert('Profile Picture updated')
           setprofuploadbtn(false)
@@ -162,13 +162,14 @@ const Roomadmin = () => {
     <div>
        
      {updatebar && <div className='rooms-update'>
+      <h1 className='fs-4' style={{borderRadius:'50%',float:'right',cursor:'pointer',border:"1px solid black",width:'35px',color:'darkgreen',textAlign:'center'}} onClick={handleupdatebarclose}>X</h1>
         <h1 className='fs-2 ml-5 mb-3 mt-5'>Rooms Updation</h1>
           <div className='row'>
             <div className='col-3 '>RoomName/Roomtype</div>
             <div className='col-9 '><select style={{padding:'5px',width:'250px',borderRadius:'5px', marginBottom:'5px'}} onChange={(e)=>{setroomtype(e.target.value)}}>
-              <option defaultValue={roomtype}>Superior Rooms</option>
-              <option>Deluxe Rooms</option>
-              <option>Junior Suite Rooms</option>
+              <option value='Superior Double'>Superior Double</option>
+              <option value='Delux Room'>Delux Room</option>
+              <option value='Junior Room'>Junior Room</option>
               </select></div>
             <div className='col-3 '>cost</div>
             <div className='col-9 '><input style={{padding:'5px',width:'250px',borderRadius:'5px',marginBottom:'5px'}} type='number' placeholder='Cost of the Room' value={cost} onChange={(e)=>{setcost(e.target.value)}} /></div>
@@ -177,7 +178,7 @@ const Roomadmin = () => {
           </div>
          <h1>Chenge Room Picture</h1>
           <label htmlFor="file-upload" className='custom-file-upload1'>
-          <img src={postImage.myFile || avtr} alt="img"/>
+          <img src={postImage.myFile || avtr} alt="img" style={{width:'200px',height:'200px'}}/>
         </label>
         
         <input 
@@ -217,6 +218,9 @@ const Roomadmin = () => {
         ))
       }
     </div>
+    <div className='Header-bar-button'>
+ <a className='btn btn-dark w-75' href='/Adminkiscol'>Back To Admin Page</a>
+ </div>
     </div>
   )
 }

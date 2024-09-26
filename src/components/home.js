@@ -19,6 +19,7 @@ import { isAuthenticated } from "./services/Auth"
 import Nav from './Nav';
 import Footer from './footer';
 import Accordions from './Accordion';
+import Getroomdata from './pages/getroomdata';
 
 
  
@@ -85,7 +86,7 @@ export default function Home() {
     
   };
 
-  
+  Getroomdata();
   const [date, setDate] = useState(new Date());
   const [todate, settodate] = useState(new Date());
   
