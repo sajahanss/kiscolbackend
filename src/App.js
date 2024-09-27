@@ -22,8 +22,17 @@ import Roomadmin from "./components/Admin/Roomadmin";
 import BookingAdmin from "./components/Admin/BookingAdmin";
 import Admin from "./components/Admin/Admin";
 import { getUseremail } from "./components/services/Storage";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [gmail,setgmail]=useState('');
+
+  useEffect(()=>{
+    setgmail(getUseremail)
+  },[gmail])
+
+  
+  
   return (
     <div className='App'>
        
@@ -45,8 +54,8 @@ function App() {
                 <Route path="/about" element={<Aboutus />} />
                 <Route path="/enquiry" element={<Enquiry />} />
                 <Route path="/bookingAdmin" element={<BookingAdmin />} />
-               {getUseremail()==='admin@admin.in' &&   <Route path="/Adminkiscol" element={<Admin />} />}
-               {getUseremail()==='admin@admin.in' &&  <Route path="/roomAdmin" element={<Roomadmin />} />}
+               {gmail==='admin@admin.in' &&   <Route path="/Adminkiscol" element={<Admin />} />}
+               {gmail==='admin@admin.in' &&  <Route path="/roomAdmin" element={<Roomadmin />} />}
                 
           </Routes>
       

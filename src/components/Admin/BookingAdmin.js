@@ -3,8 +3,10 @@ import axios from 'axios'
 import './BookingAdmin.css'
 import { Roomsdetail } from './Roomadmin'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const BookingAdmin = () => {
+    const navigate=useNavigate()
     const [invoicedatas,setinvoicedatas]=useState([])
     const [bookingbar,setbookingbar]=useState(false)
     const [bookeddata,setbookeddata]=useState([]);
@@ -24,9 +26,10 @@ const BookingAdmin = () => {
            
         })
         .catch(err=>console.log(err))
+        
 
     },[])
-
+  
 
     if(invoicedatas.length!==0){
         invoicedatas.map((st)=>{
@@ -91,7 +94,7 @@ const BookingAdmin = () => {
          .then((output)=>{
             alert('checked In')
             setbookingbar(false);
-             window.location.reload(false)
+            navigate('/Adminkiscol')
          })
          .catch((err)=>{console.log(err)})
          
@@ -105,7 +108,7 @@ const BookingAdmin = () => {
        .then((output)=>{
         alert('checked out')
         setbookingbar(false);
-         window.location.reload(false)
+        navigate('/Adminkiscol')
      })
      .catch((err)=>{console.log(err)})
 

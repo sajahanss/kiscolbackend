@@ -6,6 +6,7 @@ import { useState } from 'react'
 import {getUserName,getprofilepic,getUseremail} from './services/Storage'
 import { Link } from 'react-router-dom';
 import { logout,isAuthenticated } from './services/Auth'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -28,6 +29,7 @@ const navigation = [
     return classes.filter(Boolean).join(' ')
   }
 function Nav() {
+  const navigate=useNavigate()
  
    const [btnstate,setbtnstate]=useState(false)
    const [propic,setpropic]=useState('');
@@ -52,7 +54,7 @@ function Nav() {
 
    const logoutUser = ()=>{
     logout();
-    window.location.reload(false);
+    navigate('/')
 }
 
   return (
