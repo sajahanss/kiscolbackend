@@ -45,7 +45,7 @@ function App() {
                 <Route path="/about" element={<Aboutus />} />
                 <Route path="/enquiry" element={<Enquiry />} />
                 <Route path="/bookingAdmin" element={<BookingAdmin />} />
-               {getUseremail()==='admin@admin.in' && <Route path="/Adminkiscol" element={<Admin />} />}
+               {getUseremail()==='admin@admin.in' &&   <Route path="/Adminkiscol" element={<Admin />} />}
                {getUseremail()==='admin@admin.in' &&  <Route path="/roomAdmin" element={<Roomadmin />} />}
                 
           </Routes>
