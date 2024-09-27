@@ -3,10 +3,11 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import cmplogo from './logo.png'
 import { useState } from 'react'
-import {getUserName,getprofilepic,getUseremail} from './services/Storage'
+import {getUserName,getprofilepic,getUseremail,storeprofileData, getUserData} from './services/Storage'
 import { Link } from 'react-router-dom';
 import { logout,isAuthenticated } from './services/Auth'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 
 
@@ -34,9 +35,13 @@ function Nav() {
    const [btnstate,setbtnstate]=useState(false)
    const [propic,setpropic]=useState('');
    const ppic=getprofilepic();
-
+   const userprofileid=getUserData()
     useEffect(()=>{
-      setpropic(ppic);
+      
+      //  axios.post('https://kiscol-backend.onrender.com/uploads/profile',{userprofileid})
+      //  .then((res)=>{if(res.data.length !==0) { storeprofileData(res.data[0].myFile);}})
+      //  .catch(err=>console.log(err))
+        setpropic(ppic);
     },[ppic]);
 
    function handleclick(item){

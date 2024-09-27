@@ -6,11 +6,13 @@ import { getUserData, getUseremail } from '../services/Storage';
 import { getUserName } from '../services/Storage';
 import axios from 'axios'
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import UploadedDP from './uploadprofile';
 
 
 const MyAccount = () => {
+    const navigate=useNavigate();
     const [invoicedatas,setinvoicedatas]=useState([]);
     var user_id= getUserData();
     const [inorderbar,setinorderbar]=useState(false)
@@ -44,7 +46,7 @@ const MyAccount = () => {
     const logoutUser = ()=>{
         console.log("sign out")
         logout();
-        window.location.reload(false);
+        navigate('/')
         
     }
     return ( 
