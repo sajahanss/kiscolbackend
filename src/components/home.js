@@ -15,7 +15,7 @@ import facility from './images/homepage/facility.jpg'
 import reservation from './images/homepage/reservation.jpg'
 import contact from './images/homepage/contactus.jpg'
 import 'react-slideshow-image/dist/styles.css'
-import { isAuthenticated } from "./services/Auth"
+import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './footer';
 import Accordions from './Accordion';
@@ -114,7 +114,7 @@ export default function Home() {
                             <div className="card-body">
                                    <h5 class="card-title text-3xl font-bold">Superior Rooms</h5>
                                   <p className="card-text">Breakfast, Dinner or Lunch 24 hrs wifi, Fruit Basket & Cookie platter on arrival. Automated Massage Chair.</p>
-                                  <a href="/booking" class="btn btn-primary">Book Now</a>
+                                  <Link to="/booking" class="btn btn-primary">Book Now</Link>
                             </div>
                     </div>
 
@@ -125,7 +125,7 @@ export default function Home() {
                             <div className="card-body">
                                   <h5 class="card-title text-3xl font-bold">Deluxe Rooms</h5>
                                   <p className="card-text">Breakfast, Dinner or Lunch 24 hrs wifi, Fruit Basket & Cookie platter on arrival. Automated Massage Chair.</p>
-                                  <a href="/booking" class="btn btn-primary">Book Now</a>       
+                                  <Link to="/booking" class="btn btn-primary">Book Now</Link>       
                             </div>
                     </div>
 
@@ -136,7 +136,7 @@ export default function Home() {
                             <div className="card-body">
                                   <h5 class="card-title text-3xl font-bold">Junior Suite Rooms</h5>
                                   <p className="card-text">Breakfast, Dinner or Lunch 24 hrs wifi, Fruit Basket & Cookie platter on arrival. Automated Massage Chair.</p>
-                                  <a href="/booking" class="btn btn-primary">Book Now</a>       
+                                  <Link to="/booking" class="btn btn-primary">Book Now</Link>       
                             </div>
                     </div>
 
@@ -147,7 +147,7 @@ export default function Home() {
                             <div className="card-body">
                                   <h5 class="card-title text-3xl font-bold">Executive Suite Rooms</h5>
                                   <p className="card-text">Breakfast, Dinner or Lunch 24 hrs wifi, Fruit Basket & Cookie platter on arrival. Automated Massage Chair.</p>
-                                  <a href="/booking" class="btn btn-primary">Book Now</a>       
+                                  <Link to="/booking" class="btn btn-primary">Book Now</Link>       
                             </div>
                     </div>
 
@@ -174,7 +174,7 @@ export default function Home() {
                           <div class="card-body text-center">
                              <h2 class="card-title">Rooms</h2>
                               <p class="card-text">Our rooms are designed to offer the perfect blend of comfort.</p>
-                              <a href="/rooms" class="btn btn-primary">More Details</a>
+                              <Link to="/rooms" class="btn btn-primary">More Details</Link>
                         </div>
                     </div>
 
@@ -183,7 +183,7 @@ export default function Home() {
                       <div class="card-body text-center">
                              <h2 class="card-title">Banquets</h2>
                               <p class="card-text">Elegant banquet facility suitable for any occasion.</p>
-                              <a href="/rooms" class="btn btn-primary">More Details</a>
+                              <Link to="/rooms" class="btn btn-primary">More Details</Link>
                         </div>
                     </div>
                  
@@ -194,7 +194,7 @@ export default function Home() {
                       <div class="card-body text-center">
                              <h2 class="card-title">Facilities</h2>
                               <p class="card-text">We will take care of everything for you.</p>
-                              <a href="/rooms" class="btn btn-primary">More Details</a>
+                              <Link to="/rooms" class="btn btn-primary">More Details</Link>
                         </div>
                     </div>
 
@@ -204,7 +204,7 @@ export default function Home() {
                       <div class="card-body text-center">
                              <h2 class="card-title">Reservation</h2>
                               <p class="card-text">24 Hours check in and check out.</p>
-                              <a href="/rooms" class="btn btn-primary">More Details</a>
+                              <Link to="/rooms" class="btn btn-primary">More Details</Link>
                         </div>
                     </div>
                
@@ -216,7 +216,7 @@ export default function Home() {
                       <div class="card-body text-center">
                              <h2 class="card-title">Contact Us</h2>
                               <p class="card-text">We will take care of everything for you.</p>
-                              <a href="/rooms" class="btn btn-primary">More Details</a>
+                              <Link to="/rooms" class="btn btn-primary">More Details</Link>
                         </div>
                     </div>
                     
@@ -231,7 +231,7 @@ export default function Home() {
        <center> <img src={borimg} alt=''/></center>
         <p>It isn’t every day that you plan an elaborate trip to Kovai - be it a quick solo trip to enjoy the weekend, pilgrimage with family, or long-overdue friends outing. So, it makes sense that when you do plan your trip, you will expect everything to be perfect and make your stay memorable.With so many star hotels in the market and such a wide array of services they offer, how do you choose good hotels in Coimbatore? Read on to know-how!...
         </p>
-        <a href="/booking" class="btn btn-success">More Details</a>
+        <Link to="/booking" class="btn btn-success">More Details</Link>
        </div>   
 
       

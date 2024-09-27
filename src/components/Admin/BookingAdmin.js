@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import axios from 'axios'
 import './BookingAdmin.css'
 import { Roomsdetail } from './Roomadmin'
+import { Link } from 'react-router-dom'
 
 const BookingAdmin = () => {
     const [invoicedatas,setinvoicedatas]=useState([])
@@ -12,7 +13,7 @@ const BookingAdmin = () => {
     const bookedroomtype=Roomsdetail()
     const [roomno,setroomno]=useState(null)
     const [status,setstatus]=useState([])
-    
+  
     
     useEffect(()=>{
         
@@ -26,9 +27,10 @@ const BookingAdmin = () => {
 
     },[])
 
- 
-    if(invoicedatas.length!=0){
+
+    if(invoicedatas.length!==0){
         invoicedatas.map((st)=>{
+          
             status.push(false);
         })
     }
@@ -114,7 +116,7 @@ const BookingAdmin = () => {
         
         <div className="order__history__container2">
         <div className='Header-bar-button'>
-            <a className='btn btn-dark w-75' href='/Adminkiscol'>Back To Admin Page</a>
+            <Link className='btn btn-dark w-75' to='/Adminkiscol'>Back To Admin Page</Link>
          </div>
                 <div className="order__history2">
                     <div className="order__history__header2 fs-1 text-center m-3">Booking Information </div>

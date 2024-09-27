@@ -1,7 +1,7 @@
 import React from 'react'
 import './footer.css'
-import emailsvg from './images/email.svg'
 import { SocialIcon } from 'react-social-icons'
+import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <> 
@@ -61,28 +61,28 @@ const Footer = () => {
         <h5>Hot Links</h5>
         <ul>
           <li>
-            <a><span>&#8594;</span>Home</a>
+            <Link to='/'><span>&#8594;</span>Home</Link>
           </li>
           <li>
-            <a><span>&#8594;</span>Blog</a>
+            <Link to='https://www.kiscolgrands.com/blog/'><span>&#8594;</span>Blog</Link>
           </li>
           <li>
-            <a><span>&#8594;</span>The Brand</a>
+            <Link to='/'><span>&#8594;</span>The Brand</Link>
           </li>
           <li>
-            <a><span>&#8594;</span>Reservations</a>
+            <Link to='/reservation'><span>&#8594;</span>Reservations</Link>
           </li>
           <li>
-            <a><span>&#8594;</span>Corporate</a>
+            <Link to='/'><span>&#8594;</span>Corporate</Link>
           </li>
           <li>
-            <a><span>&#8594;</span>Dining & Bar</a>
+            <Link to='/dining'><span>&#8594;</span>Dining & Bar</Link>
           </li>
           <li>
-            <a><span>&#8594;</span>Banquets</a>
+            <Link to='/banquets'><span>&#8594;</span>Banquets</Link>
           </li>
           <li>
-            <a><span>&#8594;</span>Contact Us</a>
+            <Link to='/'><span>&#8594;</span>Contact Us</Link>
           </li>
         </ul>
       </div>

@@ -4,13 +4,13 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import cmplogo from './logo.png'
 import { useState } from 'react'
 import {getUserName,getprofilepic,getUseremail} from './services/Storage'
-
+import { Link } from 'react-router-dom';
 import { logout,isAuthenticated } from './services/Auth'
 
 
 
 const navigation = [
-    { name: 'Home', href: '/', current: false },
+    { name: 'Home', href: '/', current: true },
     { name: 'Reservations', href: '/reservation', current: false },
     { name: 'Facilities', href: '/Facilities', current: false },
     { name: 'Rooms', href: '/rooms', current: false },
@@ -30,22 +30,25 @@ const navigation = [
 function Nav() {
  
    const [btnstate,setbtnstate]=useState(false)
-   const [isActive,setisActive]=useState(false)
    const [propic,setpropic]=useState('');
-    const ppic=getprofilepic();
+   const ppic=getprofilepic();
 
     useEffect(()=>{
       setpropic(ppic);
     },[ppic]);
 
    function handleclick(item){
+     navigation.map((navig)=>{
+      navig.current=false;
+     })
       item.current=true
      setbtnstate(btnstate =>!btnstate)
-      setisActive(isActive=>!isActive)
+     
+
    }
    
    let active=" outline-none ring-2 ring-white ring-offset-2 ring-offset-gray-800"
-   let togglecheck= btnstate ?  active : '';
+   
 
    const logoutUser = ()=>{
     logout();
@@ -55,9 +58,9 @@ function Nav() {
   return (
     <div>
        
-       <a className='bkbutton' href='/booking'>
+       <Link className='bkbutton' to='/booking'>
         Click Here to Book Now
-     </a>
+     </Link>
       <Disclosure as="nav" className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 md:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
@@ -87,9 +90,9 @@ function Nav() {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                      onClick={(e)=>handleclick(item)}
                     aria-current={item.current ? 'page' : undefined}
                       className={classNames(
@@ -103,7 +106,7 @@ function Nav() {
                     // }}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -141,12 +144,12 @@ function Nav() {
               >
               {isAuthenticated()?<MenuItem>
               {getUseremail() === 'admin@admin.in' ?
-                <a href="/Adminkiscol" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                <Link to="/Adminkiscol" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                 Administration
-              </a>: 
-              <a href="/profile" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+              </Link>: 
+              <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                     Your Profile
-                  </a>
+                  </Link>
                 }
                  
                 </MenuItem> :null}
@@ -156,19 +159,19 @@ function Nav() {
                   </a>
                 </MenuItem>:null} */}
                 {isAuthenticated()? <MenuItem>
-                  <a href="/" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100" onClick={logoutUser} style={{cursor:"pointer"}}>
+                  <Link to="/" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100" onClick={logoutUser} style={{cursor:"pointer"}}>
                     Sign out
-                  </a>
+                  </Link>
                 </MenuItem>:null}
                 {!isAuthenticated()?<MenuItem>
-                  <a href="/login" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                  <Link to="/login" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                     Login
-                  </a>
+                  </Link>
                 </MenuItem>:null}
                 {!isAuthenticated()?<MenuItem>
-                  <a href="/register" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                  <Link to="/register" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                     Register
-                  </a>
+                  </Link>
                 </MenuItem>:null}
                 
               </MenuItems>
@@ -182,8 +185,8 @@ function Nav() {
           {navigation.map((item) => (
             <DisclosureButton
               key={item.name}
-              as="a"
-              href={item.href}
+              as="Link"
+              to={item.href}
               aria-current={item.current ? 'page' : undefined}
               className={classNames(
                 item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',

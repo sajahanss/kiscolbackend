@@ -11,13 +11,13 @@ import delux from '../Image/booking/deluxroom.jpg'
 import junior from '../Image/booking/junior.jpg'
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { FaRupeeSign } from "react-icons/fa";
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import axios from 'axios';
 import DatePicker from 'react-datepicker'
 import { getUserData } from '../services/Storage';
 import Nav from '../Nav';
 import { useNavigate } from 'react-router-dom';
-import cpntusjpg from '../images/homepage/recep.webp'
+
 import Getroomdata from './getroomdata';
 import { usePDF } from 'react-to-pdf';
 

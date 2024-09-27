@@ -3,7 +3,7 @@ import Home from "./components/home";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RegisterPage from "./components/pages/Register";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LoginPage from "./components/pages/Login";
 
 import Reservation from "./components/Reservation";
@@ -28,7 +28,7 @@ function App() {
     <div className='App'>
        
       
-      <BrowserRouter>
+     
       
           <Routes>
                 <Route path="/register" element={<RegisterPage/>} />
@@ -50,7 +50,7 @@ function App() {
                 
           </Routes>
       
-      </BrowserRouter>
+     
       
     </div>
   );

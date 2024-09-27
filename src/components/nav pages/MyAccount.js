@@ -1,6 +1,6 @@
 import Account from './Account';
 import './MyAccount.css';
-
+import { Link } from 'react-router-dom'
 import { logout } from '../services/Auth';
 import { getUserData, getUseremail } from '../services/Storage';
 import { getUserName } from '../services/Storage';
@@ -59,10 +59,10 @@ const MyAccount = () => {
                     <div className="account__holder__name">Account holder name : {getUserName()}</div>
                     <div className="account__holder__email">Account holder email : {getUseremail()}</div>
                     <div className="manage__account__action mt-2">
-                       {getUseremail()==='admin@admin.in' ? <a href="/Adminkiscol" className='btn btn-dark'>Admin</a> : null }
-                        <a href="/" className="btn btn-dark ms-5" onClick={logoutUser} style={{cursor:"pointer"}}>
+                       {getUseremail()==='admin@admin.in' ? <Link to="/Adminkiscol" className='btn btn-dark'>Admin</Link> : null }
+                        <Link to="/" className="btn btn-dark ms-5" onClick={logoutUser} style={{cursor:"pointer"}}>
                     Sign out
-                  </a>  
+                  </Link>  
                     </div>
                 </div>
             </div>
